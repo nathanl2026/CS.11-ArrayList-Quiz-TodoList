@@ -19,16 +19,6 @@ public class TodoList {
         return true;
     }
 
-    public boolean removeTask(String name) {
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getName().equals(name)) {
-                tasks.remove(i);
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean updateTaskUrgency(String name, int urgency) {
 
         for (Task task : tasks) {
@@ -40,25 +30,45 @@ public class TodoList {
         return false;
     }
 
+    public boolean removeTask(String name) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getName().equals(name)) {
+                tasks.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
-     * The method mostUrgent will return the name of the task that is the most urgent (i.e. the task with the
-     * highest urgency). If there are multiple tasks whose urgency is equal to the maximum, the first task
+     * The method mostUrgent will return the name of the task that is the most urgent
+     * (i.e. the task with the
+     * highest urgency). If there are multiple tasks whose urgency is equal to the maximum,
+     * the first task
      * with that urgency will be returned.
      * @return the name of the task with the current highest urgency (a String).
      */
     public String mostUrgent() {
-
-        return null;
-
+        Task highestUrgency = tasks.get(0);
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getUrgency() > highestUrgency.getUrgency()) {
+                highestUrgency = tasks.get(i);
+            }
+        }
+        return highestUrgency.getName();
     }
 
     /**
-     * The method averageUrgency will return the average (arithmetic mean) of the urgency across all tasks
+     * The method averageUrgency will return the average (arithmetic mean)
+     * of the urgency across all tasks
      * @return the average urgency across all tasks (a double).
      */
     public double averageUrgency() {
-
-        return 0.0;
+        double calcAverage = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            calcAverage += tasks.get(i).getUrgency();
+        }
+        return calcAverage/tasks.size();
 
     }
 
